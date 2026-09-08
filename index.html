@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kwa-Fuzokuhle Primary School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233A;
+    --royal:#1B3A6B;
+    --royal-dark:#0F1F3D;
+    --sky:#3FA9CC;
+    --sky-pale:#EAF5FA;
+    --gold:#C99A3A;
+    --gold-dark:#9C772A;
+    --maroon:#A6394A;
+    --paper:#F4F7FA;
+    --white:#FFFFFF;
+    --line:#DCE3EC;
+    --text-soft:#4E5A6C;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Karla',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.55;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    margin:0 0 .4em 0;
+    color:var(--royal-dark);
+    line-height:1.15;
+    font-weight:600;
+  }
+  p{margin:0 0 1em 0; color:var(--text-soft);}
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .container{max-width:1120px;margin:0 auto;padding:0 28px;}
+  :focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+
+  /* ---------- NAV ---------- */
+  header.site-header{
+    position:sticky;top:0;z-index:40;
+    background:var(--white);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 28px;max-width:1120px;margin:0 auto;gap:20px;
+  }
+  .brand{display:flex;align-items:center;gap:12px;}
+  .brand-logo{
+    width:48px;height:48px;border-radius:50%;object-fit:cover;
+    border:2px solid var(--gold);flex:none;background:var(--white);
+  }
+  .brand-text .school-name{font-family:'Fraunces',serif;font-weight:600;font-size:17px;color:var(--royal-dark);}
+  .brand-text .school-motto{font-size:12px;color:var(--text-soft);}
+  nav.main-nav{display:flex;align-items:center;gap:26px;}
+  nav.main-nav a{font-size:15px;font-weight:500;color:var(--ink);white-space:nowrap;}
+  nav.main-nav a:hover{color:var(--royal);}
+  .btn{
+    display:inline-block;padding:11px 22px;border-radius:6px;
+    font-weight:600;font-size:14.5px;cursor:pointer;border:none;
+    transition:transform .12s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-gold{background:var(--gold);color:var(--royal-dark);}
+  .btn-gold:hover{background:var(--gold-dark);color:var(--white);}
+  .btn-outline{background:transparent;border:1.5px solid var(--white);color:var(--white);}
+  .btn-royal{background:var(--royal);color:var(--white);}
+  .btn-royal:hover{background:var(--royal-dark);}
+  .menu-toggle{display:none;background:none;border:none;font-size:26px;color:var(--royal);cursor:pointer;}
+
+  /* ---------- HERO SLIDESHOW ---------- */
+  .hero{position:relative;height:600px;overflow:hidden;background:var(--royal-dark);}
+  .hero-slide {
+    position:absolute;top:0;left:0;width:100%;height:100%;
+    opacity:0;transition:opacity 1s ease-in-out;z-index:1;
+  }
+  .hero-slide.active {opacity:1;z-index:2;}
+  .hero-slide img{width:100%;height:100%;object-fit:cover;object-position:center 15%;}
+  @media (max-width:700px){ .hero{height:440px;} }
+  .hero-bar{
+    position:absolute;left:0;right:0;bottom:0;
+    background:rgba(15,31,61,0.88);
+    color:var(--white);
+    padding:30px 0 34px;
+    z-index:10;
+  }
+  .hero-bar .container{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;}
+  .hero-bar h1{color:var(--white);font-size:clamp(28px,4vw,42px);max-width:640px;margin-bottom:.25em;}
+  .hero-bar .loc{color:#C9D6E8;font-size:14.5px;margin-bottom:16px;}
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .hero-nav-btn {
+    position:absolute;top:40%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;
+    border:none;padding:15px 20px;cursor:pointer;z-index:11;font-size:20px;border-radius:4px;
+    transition:background 0.2s;
+  }
+  .hero-nav-btn:hover{background:rgba(0,0,0,0.7);}
+  .hero-prev{left:20px;}
+  .hero-next{right:20px;}
+
+  /* ---------- STATS STRIP ---------- */
+  .stats-strip{background:var(--white);border-bottom:1px solid var(--line);}
+  .stats-row{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    max-width:1120px;margin:0 auto;
+  }
+  .stat-item{
+    text-align:center;padding:26px 10px;
+    border-left:1px solid var(--line);
+  }
+  .stat-item:first-child{border-left:none;}
+  .stat-item .num{font-family:'Fraunces',serif;font-size:28px;font-weight:700;color:var(--royal);}
+  .stat-item .label{font-size:13px;color:var(--text-soft);margin-top:2px;}
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:78px 0;}
+  .section-head{max-width:640px;margin-bottom:44px;}
+  .eyebrow{color:var(--sky);font-weight:700;font-size:13.5px;letter-spacing:.02em;margin-bottom:6px;display:block;}
+  .section-head h2{font-size:clamp(24px,3vw,32px);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start;}
+  .about-block{border-left:3px solid var(--gold);padding-left:22px;margin-bottom:28px;}
+  .about-block h3{font-size:19px;margin-bottom:8px;}
+  .values-list{list-style:none;margin:0;padding:0;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
+  .values-list li{display:flex;gap:14px;padding:18px 20px;border-bottom:1px solid var(--line);}
+  .values-list li:last-child{border-bottom:none;}
+  .values-list .mark{
+    font-family:'Fraunces',serif;font-weight:700;color:var(--gold-dark);
+    font-size:16px;flex:none;
+  }
+
+  /* ---------- NEWS ---------- */
+  .news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+  .news-card{
+    background:var(--white);border:1px solid var(--line);border-radius:0 0 var(--radius) var(--radius);
+    overflow:hidden;display:flex;flex-direction:column;
+  }
+  .news-card .thumb{height:220px;overflow:hidden;background:var(--sky-pale);}
+  .news-card .thumb img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+  .news-card .body{padding:18px 20px 22px;border-top:4px solid var(--accent,var(--sky));flex:1;}
+  .tag-pill{
+    display:inline-block;font-size:11.5px;font-weight:700;color:var(--white);
+    background:var(--accent,var(--sky));padding:3px 10px;border-radius:20px;margin-bottom:10px;
+  }
+  .news-card h3{font-size:17px;margin-bottom:6px;}
+  .news-card p{font-size:14px;margin-bottom:0;}
+
+  /* ---------- ACADEMICS ---------- */
+  .phase-rail{position:relative;padding-left:34px;}
+  .phase-rail::before{
+    content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:var(--line);
+  }
+  .phase{position:relative;margin-bottom:38px;}
+  .phase:last-child{margin-bottom:0;}
+  .phase::before{
+    content:"";position:absolute;left:-34px;top:4px;width:20px;height:20px;border-radius:50%;
+    background:var(--white);border:3px solid var(--royal);
+  }
+  .phase h3{font-size:19px;margin-bottom:4px;}
+  .phase .grades{font-size:13px;color:var(--sky);font-weight:700;margin-bottom:10px;}
+  .subject-chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .subject-chips span{
+    font-size:13px;background:var(--sky-pale);color:var(--royal-dark);
+    padding:6px 12px;border-radius:6px;border:1px solid #D6EAF2;
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:10px;
+  }
+  .gallery-grid .g-item{position:relative;overflow:hidden;border-radius:6px;background:var(--sky-pale);}
+  .gallery-grid .g-item:nth-child(1){grid-row:span 2;}
+  .gallery-grid .g-item:nth-child(6){grid-row:span 2;}
+  .gallery-grid img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+  @media (max-width:600px){ .gallery-grid{grid-auto-rows:170px;} }
+  .g-cap{
+    position:absolute;left:0;right:0;bottom:0;background:rgba(15,31,61,0.85);color:#fff;
+    font-size:12.5px;padding:8px 10px;transform:translateY(100%);transition:transform .18s ease;
+  }
+  .g-item:hover .g-cap, .g-item:focus-within .g-cap{transform:translateY(0);}
+
+  /* ---------- PORTAL TEASER ---------- */
+  .portal-teaser{background:var(--royal);color:var(--white);}
+  .teaser-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;}
+  .teaser-grid h2{color:var(--white);font-size:clamp(24px,3vw,32px);}
+  .teaser-grid p{color:#C9D6E8;}
+  .teaser-points{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:14px;}
+  .teaser-points li{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:#E4ECF6;}
+  .teaser-points .dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--gold);margin-top:7px;}
+  .teaser-card{background:var(--royal-dark);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius);padding:30px;}
+  .teaser-card .kicker{color:var(--gold);font-weight:700;font-size:13px;margin-bottom:6px;display:block;}
+  .teaser-card h3{color:var(--white);font-size:20px;}
+  .teaser-card p{color:#C9D6E8;font-size:14px;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  .info-line{display:flex;gap:12px;margin-bottom:18px;font-size:14.5px;color:var(--text-soft);}
+  .info-line strong{color:var(--ink);display:block;font-size:15px;}
+  .school-info-box{
+    margin-top:24px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;font-size:13.5px;color:var(--text-soft);
+  }
+  .school-info-box div{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed var(--line);}
+  .school-info-box div:last-child{border-bottom:none;}
+  form.contact-form{display:flex;flex-direction:column;gap:14px;}
+  form.contact-form input, form.contact-form textarea{
+    padding:12px 14px;border:1px solid var(--line);border-radius:6px;font-family:'Karla',sans-serif;font-size:14.5px;
+    background:var(--white);
+  }
+  form.contact-form textarea{min-height:110px;resize:vertical;}
+  .form-note{font-size:12.5px;color:var(--text-soft);margin-top:-4px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--royal-dark);color:#C9D6E8;padding:54px 0 22px;font-size:14px;}
+  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;margin-bottom:36px;}
+  footer h4{color:var(--white);font-size:15px;font-family:'Karla',sans-serif;font-weight:700;margin-bottom:14px;}
+  footer ul{list-style:none;margin:0;padding:0;}
+  footer ul li{margin-bottom:9px;}
+  footer ul li a:hover{color:var(--gold);}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,0.12);padding-top:18px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:#93A4BC;
+  }
+
+  /* ================= PORTAL ================= */
+  #portalView{display:none;min-height:100vh;background:var(--sky-pale);}
+  .portal-topbar{
+    background:var(--white);border-bottom:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;padding:14px 28px;
+  }
+  .exit-link{font-size:14px;font-weight:600;color:var(--royal);}
+  .exit-link:hover{text-decoration:underline;}
+
+  .login-wrap{
+    min-height:calc(100vh - 65px);display:flex;align-items:center;justify-content:center;padding:40px 20px;
+  }
+  .login-card{
+    display:grid;grid-template-columns:1fr 1.1fr;max-width:840px;width:100%;
+    background:var(--white);border-radius:14px;overflow:hidden;box-shadow:0 18px 50px rgba(15,31,61,0.14);
+  }
+  .login-side{background:var(--royal);color:var(--white);padding:40px 34px;display:flex;flex-direction:column;justify-content:space-between;}
+  .login-side .monogram{
+    width:56px;height:56px;border-radius:50%;border:2px solid var(--gold);color:var(--gold);
+    display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:20px;margin-bottom:22px;overflow:hidden;
+  }
+  .login-side h3{color:var(--white);font-size:22px;}
+  .login-side p{color:#C9D6E8;font-size:14.5px;}
+  .login-form-side{padding:40px 38px;}
+  .login-form-side h3{font-size:21px;margin-bottom:4px;}
+  .login-form-side .sub{font-size:13.5px;color:var(--text-soft);margin-bottom:22px;}
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+  .field input{
+    width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:7px;font-size:15px;font-family:'Karla',sans-serif;
+  }
+  .field input:focus{border-color:var(--sky);}
+  .login-error{
+    background:#FBEAEA;border:1px solid #EFC6CA;color:var(--maroon);font-size:13.5px;
+    padding:10px 13px;border-radius:6px;margin-bottom:14px;display:none;
+  }
+  .btn-block{width:100%;padding:13px;}
+  .demo-toggle{
+    margin-top:18px;font-size:13.5px;color:var(--royal);font-weight:600;cursor:pointer;display:inline-block;
+  }
+  .demo-box{
+    margin-top:12px;font-size:12.5px;border:1px solid var(--line);border-radius:8px;overflow:hidden;display:none;
+    max-height:180px;overflow-y:auto;
+  }
+  .demo-box table{width:100%;border-collapse:collapse;}
+  .demo-box th, .demo-box td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);}
+  .demo-box th{background:var(--paper);font-size:11.5px;text-transform:none;color:var(--text-soft);position:sticky;top:0;}
+  .demo-box tr:last-child td{border-bottom:none;}
+  .demo-box td button{
+    font-size:12px;padding:4px 9px;border-radius:5px;border:1px solid var(--sky);background:var(--sky-pale);color:var(--royal);cursor:pointer;
+  }
+
+  /* dashboard */
+  #dashboardView{display:none;}
+  .dash-layout{display:flex;min-height:calc(100vh - 65px);}
+  .dash-sidebar{
+    width:250px;flex:none;background:var(--royal-dark);color:#E4ECF6;padding:30px 22px;
+    overflow-wrap:break-word;
+  }
+  .dash-profile{text-align:center;margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,0.12);}
+  .dash-avatar{
+    width:66px;height:66px;border-radius:50%;background:var(--royal);border:3px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:22px;
+    margin:0 auto 12px;color:var(--gold);
+  }
+  .dash-profile .name{font-weight:700;color:var(--white);font-size:15.5px;}
+  .dash-profile .meta{font-size:12.5px;color:#9FB2CC;margin-top:2px;}
+  .dash-nav{list-style:none;margin:0;padding:0;}
+  .dash-nav li{margin-bottom:4px;}
+  .dash-nav button{
+    width:100%;text-align:left;background:none;border:none;color:#C9D6E8;padding:11px 12px;border-radius:7px;
+    font-size:14.5px;cursor:pointer;font-family:'Karla',sans-serif;
+  }
+  .dash-nav button:hover{background:rgba(255,255,255,0.06);}
+  .dash-nav button.active{background:var(--royal);color:var(--white);font-weight:700;}
+  .dash-main{flex:1;padding:36px 40px;overflow:auto;}
+  .dash-panel{display:none;}
+  .dash-panel.active{display:block;}
+  .panel-head{margin-bottom:26px;}
+  .panel-head h2{font-size:23px;}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:32px;}
+  .tile{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:20px;}
+  .tile .tile-label{font-size:12.5px;color:var(--text-soft);margin-bottom:6px;}
+  .tile .tile-value{font-family:'Fraunces',serif;font-size:26px;font-weight:700;color:var(--royal);}
+  .tile .tile-sub{font-size:12px;color:var(--text-soft);margin-top:4px;}
+  .panel-card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:24px;margin-bottom:20px;}
+  .panel-card h3{font-size:16.5px;margin-bottom:14px;}
+  .notice-row{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line);}
+  .notice-row:last-child{border-bottom:none;}
+  .notice-date{
+    flex:none;width:56px;text-align:center;background:var(--sky-pale);border-radius:6px;padding:6px 2px;font-size:11.5px;color:var(--royal-dark);font-weight:700;
+  }
+  .notice-title{font-size:14.5px;font-weight:600;color:var(--ink);}
+  .notice-desc{font-size:13px;color:var(--text-soft);margin-top:2px;}
+
+  select.term-select{
+    padding:9px 12px;border:1.5px solid var(--line);border-radius:6px;font-family:'Karla',sans-serif;font-size:14px;background:var(--white);
+  }
+  .table-scroll{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  table.marks-table{width:100%;min-width:480px;border-collapse:collapse;margin-top:16px;font-size:14px;}
+  table.marks-table th{text-align:left;padding:12px 10px;border-bottom:2px solid var(--line);color:var(--text-soft);font-size:12.5px;white-space:nowrap;}
+  table.marks-table td{padding:13px 10px;border-bottom:1px solid var(--line);vertical-align:middle;line-height:1.4;}
+  table.marks-table td:first-child{white-space:nowrap;}
+  .level-pill{
+    display:inline-block;padding:4px 12px;border-radius:20px;font-size:12.5px;font-weight:700;white-space:nowrap;line-height:1.3;
+  }
+  .lvl-7,.lvl-6{background:#E5F5EA;color:#237A45;}
+  .lvl-5,.lvl-4{background:#EAF5FA;color:#1B6E8C;}
+  .lvl-3{background:#FDF3E0;color:#9C772A;}
+  .lvl-2,.lvl-1{background:#FBEAEA;color:#A6394A;}
+
+  table.timetable{width:100%;min-width:640px;border-collapse:collapse;font-size:13px;table-layout:fixed;}
+  table.timetable th{background:var(--royal);color:var(--white);padding:11px 6px;font-size:12px;font-weight:600;white-space:nowrap;}
+  table.timetable td{padding:12px 6px;border:1px solid var(--line);text-align:center;background:var(--white);line-height:1.35;word-break:break-word;}
+  table.timetable td.period-label{background:var(--sky-pale);font-weight:700;color:var(--royal-dark);white-space:nowrap;}
+  table.timetable td.break-row{background:var(--paper);color:var(--text-soft);font-style:italic;}
+
+  @media (max-width:900px){
+    nav.main-nav{display:none;}
+    .menu-toggle{display:block;}
+    .about-grid,.teaser-grid,.contact-grid{grid-template-columns:1fr;}
+    .news-grid{grid-template-columns:1fr 1fr;}
+    .stats-row{grid-template-columns:repeat(2,1fr);}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+    .footer-grid{grid-template-columns:1fr;}
+    .login-card{grid-template-columns:1fr;}
+    .login-side{display:none;}
+    .tiles{grid-template-columns:1fr;}
+  }
+  @media (max-width:760px){
+    .dash-layout{flex-direction:column;}
+    .dash-sidebar{
+      width:100%;padding:18px 20px;display:flex;flex-direction:column;gap:14px;
+    }
+    .dash-profile{
+      display:flex;align-items:center;gap:12px;text-align:left;
+      margin:0;padding:0 0 14px;border-bottom:1px solid rgba(255,255,255,0.12);
+    }
+    .dash-avatar{margin:0;width:48px;height:48px;font-size:17px;flex:none;}
+    .dash-profile .name{font-size:15px;}
+    .dash-nav{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
+    .dash-nav li{margin-bottom:0;flex:none;}
+    .dash-nav button{
+      white-space:nowrap;padding:9px 15px;font-size:13.5px;border:1px solid rgba(255,255,255,0.14);border-radius:20px;
+    }
+    #logoutBtn{border-color:rgba(243,180,187,0.35);}
+    .dash-main{padding:26px 20px;}
+  }
+  @media (max-width:600px){
+    .news-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:120px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     MAIN SITE
+========================================================= -->
+<div id="siteView">
+
+  <header class="site-header">
+    <div class="nav-row">
+      <div class="brand">
+        <img src="images/image1.jpg" alt="Kwa-Fuzokuhle Primary School Logo" class="brand-logo" onerror="this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=150&q=80'">
+        <div class="brand-text">
+          <div class="school-name">Kwa-Fuzokuhle Primary School</div>
+          <div class="school-motto">Strive for excellence</div>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <a href="#about">About</a>
+        <a href="#academics">Academics</a>
+        <a href="#news">News</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <a href="#" class="btn btn-royal" id="openPortalBtnNav">Student portal</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">&#9776;</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-slide active">
+      <img src="images/image1.jpg" alt="Kwa-Fuzokuhle Primary School Campus" onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80'">
+    </div>
+    <div class="hero-slide">
+      <img src="images/image2.jpg" alt="Students in class" onerror="this.src='https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80'">
+    </div>
+    <div class="hero-slide">
+      <img src="images/image3.jpg" alt="School grounds" onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80'">
+    </div>
+    <div class="hero-slide">
+      <img src="images/image4.jpg" alt="Extra-mural activities" onerror="this.src='https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80'">
+    </div>
+
+    <button class="hero-nav-btn hero-prev" id="heroPrev" aria-label="Previous slide">&#10094;</button>
+    <button class="hero-nav-btn hero-next" id="heroNext" aria-label="Next slide">&#10095;</button>
+
+    <div class="hero-bar">
+      <div class="container">
+        <div>
+          <div class="loc">KwaMashu, KwaZulu-Natal</div>
+          <h1>Strive for Excellence</h1>
+        </div>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-gold">Enrol / Enquire</a>
+          <a href="#" class="btn btn-outline" id="openPortalBtnHero">Portal Login</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-strip">
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="num">850+</div>
+        <div class="label">Enrolled Learners</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">28</div>
+        <div class="label">Dedicated Educators</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">100%</div>
+        <div class="label">Commitment</div>
+      </div>
+      <div class="stat-item">
+        <div class="num">Grade R-7</div>
+        <div class="label">Full Primary Phase</div>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <div class="section-head" style="margin-bottom:24px;">
+            <span class="eyebrow">ABOUT OUR SCHOOL</span>
+            <h2>A Foundation for Lifelong Success</h2>
+          </div>
+          <p>Kwa-Fuzokuhle Primary School is deeply rooted in the community, providing an inclusive, disciplined, and stimulating environment where every child can flourish academically, socially, and creatively.</p>
+          <div class="about-block">
+            <h3>Our Vision</h3>
+            <p>To produce honest, loyal, just responsible future leaders, learners who are critical thinkers so that they become independent competent & marketable through consistent and fair education.</p>
+          </div>
+          <div class="about-block">
+            <h3>Our Mission</h3>
+            <p>The school will work in collaboration with the community so that each and every learner gets quality education.</p>
+          </div>
+        </div>
+        <div>
+          <div class="section-head" style="margin-bottom:24px;">
+            <span class="eyebrow">CORE VALUES & PILLARS</span>
+            <h2>What Guides Us Everyday</h2>
+          </div>
+          <ul class="values-list">
+            <li>
+              <span class="mark">A</span>
+              <div><strong>Educating our learners in totality:</strong> Fostering holistic growth across academic, social, and emotional dimensions.</div>
+            </li>
+            <li>
+              <span class="mark">B</span>
+              <div><strong>Dedication, commitment and teamwork:</strong> Working hand in hand with staff and learners to reach common goals.</div>
+            </li>
+            <li>
+              <span class="mark">C</span>
+              <div><strong>Parental involvement in learners progress:</strong> Partnering closely with families to support every child's educational journey.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="academics" style="background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">ACADEMIC STRUCTURE</span>
+        <h2>Curriculum & Learning Phases</h2>
+      </div>
+      <div class="phase-rail">
+        <div class="phase">
+          <h3>Foundation Phase</h3>
+          <div class="grades">Grades R – 3</div>
+          <p>Focuses on basic literacy, numeracy, and foundational life skills in a nurturing environment.</p>
+          <div class="subject-chips">
+            <span>Home Language (isiZulu)</span>
+            <span>First Additional Language (English)</span>
+            <span>Mathematics</span>
+            <span>Life Skills</span>
+          </div>
+        </div>
+        <div class="phase">
+          <h3>Intermediate Phase</h3>
+          <div class="grades">Grades 4 – 6</div>
+          <p>Broadens the curriculum, introducing critical thinking, scientific inquiry, and social sciences.</p>
+          <div class="subject-chips">
+            <span>isiZulu HL</span>
+            <span>English FAL</span>
+            <span>Mathematics</span>
+            <span>Natural Sciences & Technology</span>
+            <span>Social Sciences</span>
+            <span>Life Skills</span>
+          </div>
+        </div>
+        <div class="phase">
+          <h3>Senior Phase</h3>
+          <div class="grades">Grade 7</div>
+          <p>Prepares learners for the transition to high school with specialized subject instruction and leadership opportunities.</p>
+          <div class="subject-chips">
+            <span>isiZulu HL</span>
+            <span>English FAL</span>
+            <span>Mathematics</span>
+            <span>Natural Sciences</span>
+            <span>Social Sciences</span>
+            <span>Technology</span>
+            <span>Economic & Management Sciences</span>
+            <span>Life Orientation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="news">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">NEWS & UPDATES</span>
+        <h2>Latest School Happenings</h2>
+      </div>
+      <div class="news-grid">
+        <div class="news-card" style="--accent:var(--royal);">
+          <div class="thumb"><img src="images/image5.jpg" alt="Sports day" onerror="this.src='https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80'"></div>
+          <div class="body">
+            <span class="tag-pill" style="background:var(--royal);">Sports</span>
+            <h3>Annual Athletics Trials</h3>
+            <p>Our young athletes showcased exceptional talent during the inter-house track and field events last week.</p>
+          </div>
+        </div>
+        <div class="news-card" style="--accent:var(--gold-dark);">
+          <div class="thumb"><img src="images/image6.jpg" alt="Cultural event" onerror="this.src='https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=600&q=80'"></div>
+          <div class="body">
+            <span class="tag-pill" style="background:var(--gold-dark);">Culture</span>
+            <h3>Heritage Day Celebration</h3>
+            <p>Learners and staff honored our diverse cultural backgrounds with traditional attire, dance, and storytelling.</p>
+          </div>
+        </div>
+        <div class="news-card" style="--accent:var(--sky);">
+          <div class="thumb"><img src="images/image7.jpg" alt="Academic awards" onerror="this.src='https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=600&q=80'"></div>
+          <div class="body">
+            <span class="tag-pill" style="background:var(--sky);">Academics</span>
+            <h3>Term Awards Assembly</h3>
+            <p>Recognizing top achievers across all grades who demonstrated outstanding dedication to their studies.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" style="background:var(--white);border-top:1px solid var(--line);">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">PHOTO GALLERY</span>
+        <h2>Life at Kwa-Fuzokuhle</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="g-item"><img src="images/image1.jpg" alt="Gallery image 1" onerror="this.src='https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">School Entrance</div></div>
+        <div class="g-item"><img src="images/image2.jpg" alt="Gallery image 2" onerror="this.src='https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Classroom Engagement</div></div>
+        <div class="g-item"><img src="images/image3.jpg" alt="Gallery image 3" onerror="this.src='https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Assembly Time</div></div>
+        <div class="g-item"><img src="images/image4.jpg" alt="Gallery image 4" onerror="this.src='https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Playground Fun</div></div>
+        <div class="g-item"><img src="images/image5.jpg" alt="Gallery image 5" onerror="this.src='https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Sports Event</div></div>
+        <div class="g-item"><img src="images/image6.jpg" alt="Gallery image 6" onerror="this.src='https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Cultural Dance</div></div>
+        <div class="g-item"><img src="images/image7.jpg" alt="Gallery image 7" onerror="this.src='https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Library Sessions</div></div>
+        <div class="g-item"><img src="images/image8.jpg" alt="Gallery image 8" onerror="this.src='https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Computer Lab</div></div>
+        <div class="g-item"><img src="images/image9.jpg" alt="Gallery image 9" onerror="this.src='https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Art Class</div></div>
+        <div class="g-item"><img src="images/image10.jpg" alt="Gallery image 10" onerror="this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Music & Choir</div></div>
+        <div class="g-item"><img src="images/image11.jpg" alt="Gallery image 11" onerror="this.src='https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Science Project</div></div>
+        <div class="g-item"><img src="images/image12.jpg" alt="Gallery image 12" onerror="this.src='https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Outdoor Learning</div></div>
+        <div class="g-item"><img src="images/image13.jpg" alt="Gallery image 13" onerror="this.src='https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Staff & Faculty</div></div>
+        <div class="g-item"><img src="images/image14.jpg" alt="Gallery image 14" onerror="this.src='https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Grade R Activities</div></div>
+        <div class="g-item"><img src="images/image15.jpg" alt="Gallery image 15" onerror="this.src='https://images.unsplash.com/photo-1560272564-c83b66b1ad12?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Soccer Match</div></div>
+        <div class="g-item"><img src="images/image16.jpg" alt="Gallery image 16" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Netball Team</div></div>
+        <div class="g-item"><img src="images/image17.jpg" alt="Gallery image 17" onerror="this.src='https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">School Garden</div></div>
+        <div class="g-item"><img src="images/image18.jpg" alt="Gallery image 18" onerror="this.src='https://images.unsplash.com/photo-1567168544813-cc03465b4fa8?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Prizes & Awards</div></div>
+        <div class="g-item"><img src="images/image19.jpg" alt="Gallery image 19" onerror="this.src='https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Educational Trip</div></div>
+        <div class="g-item"><img src="images/image20.jpg" alt="Gallery image 20" onerror="this.src='https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Reading Club</div></div>
+        <div class="g-item"><img src="images/image21.jpg" alt="Gallery image 21" onerror="this.src='https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Debate Team</div></div>
+        <div class="g-item"><img src="images/image22.jpg" alt="Gallery image 22" onerror="this.src='https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">School Hall</div></div>
+        <div class="g-item"><img src="images/image23.jpg" alt="Gallery image 23" onerror="this.src='https://images.unsplash.com/photo-1594708769525-2b6eef7ce8d6?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Nutrition Program</div></div>
+        <div class="g-item"><img src="images/image24.jpg" alt="Gallery image 24" onerror="this.src='https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Parent Meeting</div></div>
+        <div class="g-item"><img src="images/image25.jpg" alt="Gallery image 25" onerror="this.src='https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Graduation Day</div></div>
+        <div class="g-item"><img src="images/image26.jpg" alt="Gallery image 26" onerror="this.src='https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=400&q=80'"><div class="g-cap">Junior Sports</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="portal-teaser">
+    <div class="container">
+      <div class="teaser-grid">
+        <div>
+          <span class="eyebrow" style="color:var(--gold);">PARENT & LEARNER PORTAL</span>
+          <h2>Access Reports & Timetables Online</h2>
+          <p>Registered families can securely log in to check continuous assessment marks, term reports, attendance records, and school notices.</p>
+          <ul class="teaser-points">
+            <li><div class="dot"></div><span>Secure individual student profiles</span></li>
+            <li><div class="dot"></div><span>Download official report cards</span></li>
+            <li><div class="dot"></div><span>View daily class timetables and announcements</span></li>
+          </ul>
+        </div>
+        <div>
+          <div class="teaser-card">
+            <span class="kicker">SECURE LOGIN</span>
+            <h3>Student & Parent Portal</h3>
+            <p style="margin-bottom:20px;">Click below to open the dedicated portal sign-in screen.</p>
+            <button class="btn btn-gold btn-block" id="openPortalBtnBox">Go to Portal Login</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">GET IN TOUCH</span>
+        <h2>Contact & Admissions</h2>
+      </div>
+      <div class="contact-grid">
+        <div>
+          <p>We welcome enquiries regarding admissions, school visits, and general information. Reach out to our administrative office using the details below.</p>
+          <div class="info-line">
+            <div>📍</div>
+            <div><strong>Location</strong>KwaMashu, KwaZulu-Natal, South Africa</div>
+          </div>
+          <div class="info-line">
+            <div>📞</div>
+            <div><strong>Telephone</strong>+27 (0)31 000 0000</div>
+          </div>
+          <div class="info-line">
+            <div>✉️</div>
+            <div><strong>Email</strong>info@kwafuzokuhle.co.za</div>
+          </div>
+          <div class="school-info-box">
+            <div><span>Office Hours:</span><strong>Monday – Friday, 07:30 – 15:00</strong></div>
+            <div><span>EMIS Number:</span><strong>123456</strong></div>
+          </div>
+        </div>
+        <div>
+          <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent to the school administration.');">
+            <input type="text" placeholder="Your Full Name" required>
+            <input type="email" placeholder="Your Email Address" required>
+            <input type="text" placeholder="Subject (e.g. Grade R Admissions)">
+            <textarea placeholder="Write your message or enquiry here..." required></textarea>
+            <span class="form-note">We typically respond within 2 business days.</span>
+            <button type="submit" class="btn btn-royal">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="margin-bottom:14px;">
+            <img src="images/image1.jpg" alt="Logo" class="brand-logo" style="width:38px;height:38px;" onerror="this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=150&q=80'">
+            <div class="brand-text">
+              <div class="school-name" style="color:var(--white);">Kwa-Fuzokuhle Primary</div>
+              <div class="school-motto">Strive for excellence</div>
+            </div>
+          </div>
+          <p style="font-size:13.5px;max-width:320px;">Dedicated to shaping responsible, bright, and capable young leaders for the future of South Africa.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#academics">Academics</a></li>
+            <li><a href="#news">School News</a></li>
+            <li><a href="#gallery">Photo Gallery</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support & Portal</h4>
+          <ul>
+            <li><a href="#" class="openPortalTrigger">Portal Login</a></li>
+            <li><a href="#contact">Admissions</a></li>
+            <li><a href="#contact">Contact Office</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 Kwa-Fuzokuhle Primary School. All rights reserved.</div>
+        <div>Designed with excellence</div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+
+<!-- =========================================================
+     PORTAL VIEW
+========================================================= -->
+<div id="portalView">
+  <div class="portal-topbar">
+    <div class="brand">
+      <img src="images/image1.jpg" alt="Logo" class="brand-logo" style="width:34px;height:34px;" onerror="this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=150&q=80'">
+      <div class="brand-text">
+        <div class="school-name" style="font-size:15px;">Student Portal</div>
+      </div>
+    </div>
+    <a href="#" class="exit-link" id="exitPortalBtn">&larr; Back to Main Website</a>
+  </div>
+
+  <div class="login-wrap" id="loginScreen">
+    <div class="login-card">
+      <div class="login-side">
+        <div>
+          <div class="monogram"><img src="images/image1.jpg" alt="Logo" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" onerror="this.src='https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=150&q=80'"></div>
+          <h3>Secure Portal Access</h3>
+          <p>View marks, term reports, and daily timetables directly from your dashboard.</p>
+        </div>
+        <div style="font-size:12.5px;color:#9FB2CC;">Kwa-Fuzokuhle Primary School &bull; Secure Systems</div>
+      </div>
+      <div class="login-form-side">
+        <h3>Sign In</h3>
+        <div class="sub">Enter your credentials to access your portal</div>
+        
+        <div class="login-error" id="loginError">Invalid ID number or password. Please try again.</div>
+
+        <form id="loginForm">
+          <div class="field">
+            <label>Student ID / Admission Number</label>
+            <input type="text" id="userIdInput" placeholder="e.g. KF2026001" required>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" id="userPassInput" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-royal btn-block">Sign In</button>
+        </form>
+
+        <span class="demo-toggle" id="toggleDemoInfo">Need help or sample accounts? Click here</span>
+        <div class="demo-box" id="demoBox">
+          <table>
+            <thead>
+              <tr><th>Sample Learner</th><th>ID</th><th>Password</th><th>Action</th></tr>
+            </thead>
+            <tbody id="demoTableBody">
+              <!-- Dynamically populated sample accounts -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dashboardView">
+    <div class="dash-layout">
+      <aside class="dash-sidebar">
+        <div class="dash-profile">
+          <div class="dash-avatar" id="dashAvatar">SD</div>
+          <div>
+            <div class="name" id="dashName">Learner Name</div>
+            <div class="meta" id="dashMeta">Grade 5 &bull; ID: KF2026001</div>
+          </div>
+        </div>
+        <ul class="dash-nav">
+          <li><button class="active" onclick="switchTab('overviewTab', this)">Overview</button></li>
+          <li><button onclick="switchTab('marksTab', this)">Term Marks & Reports</button></li>
+          <li><button onclick="switchTab('timetableTab', this)">Class Timetable</button></li>
+          <li><button onclick="switchTab('noticesTab', this)">School Notices</button></li>
+          <li><button id="logoutBtn" onclick="logoutPortal()" style="color:#F3B4BB;margin-top:20px;">Sign Out</button></li>
+        </ul>
+      </aside>
+
+      <main class="dash-main">
+        <div id="overviewTab" class="dash-panel active">
+          <div class="panel-head">
+            <h2 id="welcomeHeading">Welcome back!</h2>
+            <p>Here is a quick snapshot of your current academic standing for 2026.</p>
+          </div>
+          <div class="tiles">
+            <div class="tile">
+              <div class="tile-label">Overall Average</div>
+              <div class="tile-value" id="tileAvg">78.4%</div>
+              <div class="tile-sub">Level 6 Achievement</div>
+            </div>
+            <div class="tile">
+              <div class="tile-label">Attendance Rate</div>
+              <div class="tile-value">96.5%</div>
+              <div class="tile-sub">Current Term</div>
+            </div>
+            <div class="tile">
+              <div class="tile-label">Merit Badges</div>
+              <div class="tile-value">4</div>
+              <div class="tile-sub">Behavior & Academic</div>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <h3>Recent Announcements</h3>
+            <div class="notice-row">
+              <div class="notice-date">12 Jun</div>
+              <div>
+                <div class="notice-title">Inter-House Athletics Finals</div>
+                <div class="notice-desc">All participants must arrive in full sports kit by 07:45 AM on Friday.</div>
+              </div>
+            </div>
+            <div class="notice-row">
+              <div class="notice-date">05 Jun</div>
+              <div>
+                <div class="notice-title">Winter Uniform Notice</div>
+                <div class="notice-desc">Learners are required to wear full official school winter uniform starting next week.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="marksTab" class="dash-panel">
+          <div class="panel-head">
+            <h2>Term Marks & Continuous Assessment</h2>
+            <p>Select a term to view detailed subject performance levels.</p>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;margin-bottom:14px;">
+            <label style="font-size:13.5px;font-weight:600;">Select Term:</label>
+            <select class="term-select" id="termSelect" onchange="updateMarksTable()">
+              <option value="term1">Term 1, 2026</option>
+              <option value="term2" selected>Term 2, 2026 (Current)</option>
+            </select>
+          </div>
+          <div class="panel-card">
+            <div class="table-scroll">
+              <table class="marks-table" id="marksTableContent">
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="timetableTab" class="dash-panel">
+          <div class="panel-head">
+            <h2>Weekly Class Timetable</h2>
+            <p>Your regular schedule of periods and subjects for the week.</p>
+          </div>
+          <div class="panel-card">
+            <div class="table-scroll">
+              <table class="timetable">
+                <thead>
+                  <tr>
+                    <th>Period / Time</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="period-label">P1 (08:00 - 08:50)</td>
+                    <td id="tt_m1">isiZulu HL</td>
+                    <td id="tt_tu1">Mathematics</td>
+                    <td id="tt_w1">English FAL</td>
+                    <td id="tt_th1">Mathematics</td>
+                    <td id="tt_f1">Natural Sciences</td>
+                  </tr>
+                  <tr>
+                    <td class="period-label">P2 (08:50 - 09:40)</td>
+                    <td id="tt_m2">Mathematics</td>
+                    <td id="tt_tu2">isiZulu HL</td>
+                    <td id="tt_w2">Natural Sciences</td>
+                    <td id="tt_th2">English FAL</td>
+                    <td id="tt_f2">Life Skills</td>
+                  </tr>
+                  <tr>
+                    <td class="break-row" colspan="6">First Break (09:40 - 10:10)</td>
+                  </tr>
+                  <tr>
+                    <td class="period-label">P3 (10:10 - 11:00)</td>
+                    <td id="tt_m3">English FAL</td>
+                    <td id="tt_tu3">Social Sciences</td>
+                    <td id="tt_w3">Mathematics</td>
+                    <td id="tt_th3">Social Sciences</td>
+                    <td id="tt_f3">isiZulu HL</td>
+                  </tr>
+                  <tr>
+                    <td class="period-label">P4 (11:00 - 11:50)</td>
+                    <td id="tt_m4">Life Skills</td>
+                    <td id="tt_w4">Natural Sciences</td>
+                    <td id="tt_w4">Life Skills</td>
+                    <td id="tt_th4">isiZulu HL</td>
+                    <td id="tt_f4">Mathematics</td>
+                  </tr>
+                  <tr>
+                    <td class="break-row" colspan="6">Second Break / Lunch (11:50 - 12:30)</td>
+                  </tr>
+                  <tr>
+                    <td class="period-label">P5 (12:30 - 13:20)</td>
+                    <td id="tt_m5">Social Sciences</td>
+                    <td id="tt_tu5">Creative Arts</td>
+                    <td id="tt_w5">Social Sciences</td>
+                    <td id="tt_th5">Physical Education</td>
+                    <td id="tt_f5">Assembly / Class Quiz</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="noticesTab" class="dash-panel">
+          <div class="panel-head">
+            <h2>School Notices & Circulars</h2>
+            <p>Official communication issued by school management.</p>
+          </div>
+          <div class="panel-card">
+            <div class="notice-row">
+              <div class="notice-date">12 Jun</div>
+              <div>
+                <div class="notice-title">Inter-House Athletics Finals</div>
+                <div class="notice-desc">All participants must arrive in full sports kit by 07:45 AM on Friday at the main sports field. Parents are welcome to attend.</div>
+              </div>
+            </div>
+            <div class="notice-row">
+              <div class="notice-date">05 Jun</div>
+              <div>
+                <div class="notice-title">Winter Uniform Notice</div>
+                <div class="notice-desc">Learners are required to wear full official school winter uniform starting next week. Sweaters and jackets must comply with school colors.</div>
+              </div>
+            </div>
+            <div class="notice-row">
+              <div class="notice-date">28 May</div>
+              <div>
+                <div class="notice-title">Parent-Teacher Consultation Evening</div>
+                <div class="notice-desc">Scheduled meetings will take place between 16:00 and 18:00 next Thursday in respective classrooms.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  
+  function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    currentSlide = (index + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+  }
+
+  document.getElementById('heroNext').addEventListener('click', () => {
+    showSlide(currentSlide + 1);
+  });
+
+  document.getElementById('heroPrev').addEventListener('click', () => {
+    showSlide(currentSlide - 1);
+  });
+
+  setInterval(() => {
+    showSlide(currentSlide + 1);
+  }, 5000);
+
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    const nav = document.querySelector('nav.main-nav');
+    nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+  });
+
+  // Automatically generate dynamic student records for 450 learners (IDs KF2026001 to KF2026450)
+  const firstNames = ["Sipho", "Nandi", "Thabo", "Zinhle", "Siyabonga", "Nomusa", "Mandla", "Lerato", "Lungile", "Bongani", "Simphiwe", "Ayanda", "Kagiso", "Precious", "Melani"];
+  const lastNames = ["Dlamini", "Khumalo", "Zulu", "Nkosi", "Mthethwa", "Ndlovu", "Mkhize", "Gumede", "Ngcobo", "Sithole", "Buthelezi", "Zondi", "Cele", "Mokoena", "Molefe"];
+  const gradesList = ["Grade R", "Grade 1", "Grade 2", "Grade 3", "Grade 4", "Grade 5", "Grade 6", "Grade 7"];
+  
+  const studentsData = {};
+  
+  for(let i = 1; i <= 450; i++) {
+    const id = "KF2026" + String(i).padStart(3, '0');
+    const fName = firstNames[(i * 7) % firstNames.length];
+    const lName = lastNames[(i * 13) % lastNames.length];
+    const fullName = `${fName} ${lName}`;
+    const grade = gradesList[(i * 3) % gradesList.length];
+    const initials = fName[0] + lName[0];
+    
+    const baseMarkVar = 60 + (i % 31); 
+    const markTerm1 = Math.min(95, Math.max(50, baseMarkVar));
+    const markTerm2 = Math.min(98, Math.max(52, baseMarkVar + (i % 5) - 2));
+    
+    const getLevel = (m) => m >= 80 ? 7 : m >= 70 ? 6 : m >= 60 ? 5 : m >= 50 ? 4 : 3;
+    const getDesc = (lvl) => lvl === 7 ? "Outstanding" : lvl === 6 ? "Meritorious" : lvl === 5 ? "Substantial" : "Adequate";
+
+    studentsData[id] = {
+      name: fullName,
+      grade: grade,
+      initials: initials,
+      avg: `${markTerm2}%`,
+      terms: {
+        term1: [
+          {sub: "Home Language (isiZulu)", mark: `${markTerm1}%`, lvl: getLevel(markTerm1), desc: getDesc(getLevel(markTerm1))},
+          {sub: "First Additional Lang. (English)", mark: `${markTerm1 - 3}%`, lvl: getLevel(markTerm1 - 3), desc: getDesc(getLevel(markTerm1 - 3))},
+          {sub: "Mathematics", mark: `${markTerm1 + 2}%`, lvl: getLevel(markTerm1 + 2), desc: getDesc(getLevel(markTerm1 + 2))},
+          {sub: "Life Skills / Orientation", mark: `${markTerm1 + 5}%`, lvl: getLevel(markTerm1 + 5), desc: getDesc(getLevel(markTerm1 + 5))}
+        ],
+        term2: [
+          {sub: "Home Language (isiZulu)", mark: `${markTerm2}%`, lvl: getLevel(markTerm2), desc: getDesc(getLevel(markTerm2))},
+          {sub: "First Additional Lang. (English)", mark: `${markTerm2 - 2}%`, lvl: getLevel(markTerm2 - 2), desc: getDesc(getLevel(markTerm2 - 2))},
+          {sub: "Mathematics", mark: `${markTerm2 + 3}%`, lvl: getLevel(markTerm2 + 3), desc: getDesc(getLevel(markTerm2 + 3))},
+          {sub: "Life Skills / Orientation", mark: `${markTerm2 + 4}%`, lvl: getLevel(markTerm2 + 4), desc: getDesc(getLevel(markTerm2 + 4))}
+        ]
+      }
+    };
+  }
+
+  // Populate sample demo table
+  const demoTableBody = document.getElementById('demoTableBody');
+  let demoHtml = '';
+  ["KF2026001", "KF2026045", "KF2026120", "KF2026250", "KF2026400"].forEach(sampleId => {
+    const s = studentsData[sampleId];
+    demoHtml += `<tr><td>${s.name} (${s.grade})</td><td><code>${sampleId}</code></td><td><code>pass123</code></td><td><button type="button" onclick="fillDemo('${sampleId}','pass123')">Use</button></td></tr>`;
+  });
+  demoTableBody.innerHTML = demoHtml;
+
+  let currentLoggedInUser = null;
+
+  const siteView = document.getElementById('siteView');
+  const portalView = document.getElementById('portalView');
+  const loginScreen = document.getElementById('loginScreen');
+  const dashboardView = document.getElementById('dashboardView');
+
+  function openPortal() {
+    siteView.style.display = 'none';
+    portalView.style.display = 'block';
+    window.scrollTo(0,0);
+  }
+
+  function exitPortal() {
+    portalView.style.display = 'none';
+    siteView.style.display = 'block';
+  }
+
+  document.getElementById('openPortalBtnNav').addEventListener('click', (e) => { e.preventDefault(); openPortal(); });
+  document.getElementById('openPortalBtnHero').addEventListener('click', (e) => { e.preventDefault(); openPortal(); });
+  document.getElementById('openPortalBtnBox').addEventListener('click', (e) => { e.preventDefault(); openPortal(); });
+  document.querySelectorAll('.openPortalTrigger').forEach(el => el.addEventListener('click', (e) => { e.preventDefault(); openPortal(); }));
+  document.getElementById('exitPortalBtn').addEventListener('click', (e) => { e.preventDefault(); exitPortal(); });
+
+  document.getElementById('toggleDemoInfo').addEventListener('click', () => {
+    const box = document.getElementById('demoBox');
+    box.style.display = box.style.display === 'block' ? 'none' : 'block';
+  });
+
+  function fillDemo(id, pass) {
+    document.getElementById('userIdInput').value = id;
+    document.getElementById('userPassInput').value = pass;
+    document.getElementById('demoBox').style.display = 'none';
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Automatically convert typed ID to uppercase to prevent case-sensitive mismatches
+    const idVal = document.getElementById('userIdInput').value.trim().toUpperCase();
+    const passVal = document.getElementById('userPassInput').value.trim();
+    const errBox = document.getElementById('loginError');
+
+    if(studentsData[idVal] && passVal === 'pass123') {
+      currentLoggedInUser = studentsData[idVal];
+      errBox.style.display = 'none';
+      loadDashboard(idVal);
+    } else {
+      errBox.style.display = 'block';
+    }
+  });
+
+  function loadDashboard(idVal) {
+    loginScreen.style.display = 'none';
+    dashboardView.style.display = 'block';
+
+    document.getElementById('dashAvatar').innerText = currentLoggedInUser.initials;
+    document.getElementById('dashName').innerText = currentLoggedInUser.name;
+    document.getElementById('dashMeta').innerText = `${currentLoggedInUser.grade} • ID: ${idVal}`;
+    document.getElementById('welcomeHeading').innerText = `Welcome back, ${currentLoggedInUser.name.split(' ')[0]}!`;
+    document.getElementById('tileAvg').innerText = currentLoggedInUser.avg;
+
+    updateMarksTable();
+  }
+
+  function logoutPortal() {
+    currentLoggedInUser = null;
+    document.getElementById('userIdInput').value = '';
+    document.getElementById('userPassInput').value = '';
+    dashboardView.style.display = 'none';
+    loginScreen.style.display = 'flex';
+  }
+
+  function updateMarksTable() {
+    if(!currentLoggedInUser) return;
+    const termKey = document.getElementById('termSelect').value;
+    const termRecords = currentLoggedInUser.terms[termKey];
+    
+    let html = `<thead><tr><th>Subject</th><th>Mark (%)</th><th>Achievement Level</th><th>Performance Description</th></tr></thead><tbody>`;
+    termRecords.forEach(rec => {
+      html += `<tr>
+        <td><strong>${rec.sub}</strong></td>
+        <td>${rec.mark}</td>
+        <td><span class="level-pill lvl-${rec.lvl}">Level ${rec.lvl}</span></td>
+        <td>${rec.desc}</td>
+      </tr>`;
+    });
+    html += `</tbody>`;
+    document.getElementById('marksTableContent').innerHTML = html;
+  }
+
+  function switchTab(tabId, btnElement) {
+    document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.dash-nav button').forEach(b => {
+      if(b.id !== 'logoutBtn') b.classList.remove('active');
+    });
+    document.getElementById(tabId).classList.add('active');
+    btnElement.classList.add('active');
+  }
+</script>
+</body>
+</html>
